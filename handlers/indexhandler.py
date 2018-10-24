@@ -1,10 +1,9 @@
 
 import time
-from handlers.basehandler import BaseHandler
-from handlers.decorator import thread_pool_executor
+from tornado.web import RequestHandler
 
-class IndexHandler(BaseHandler):
-    @thread_pool_executor
+class IndexHandler(RequestHandler):#只能一个一个的处理接口
     def get(self, *args, **kwargs):
         time.sleep(3)
-        return "睡了三秒，哈哈哈哈哈"
+        data = {"data":"睡了三秒，哈哈哈哈哈"}
+        self.write(data)

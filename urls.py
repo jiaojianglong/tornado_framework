@@ -4,6 +4,13 @@
 # @Author  : jiaojianglong
 
 from handlers.indexhandler import IndexHandler
+# from handlers.base_handler.handlers import ThreadPoolBase
+# from handlers.base_handler.handlers import AsyncHandler
+from handlers.asynchandler import AsyncHandler
+from handlers.threadpoolhandler import ThreadPoolHandler
 handler = [
-    (r"/", IndexHandler),
+    (r"/index", IndexHandler),
+    (r"/threadpool", ThreadPoolHandler),
+    (r"/async", AsyncHandler),
+
 ]
