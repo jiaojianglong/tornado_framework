@@ -9,6 +9,15 @@ from concurrent.futures import ThreadPoolExecutor
 from tornado.concurrent import run_on_executor
 import time
 import json
+
+
+from rq import Queue
+from redis import Redis,ConnectionPool
+redis_conn = ConnectionPool(host="127.0.0.1", port=6379, db=1,)
+redis_conn = Redis(connection_pool=redis_conn)
+q = Queue(connection=redis_conn)
+
+
 class Basehandler(RequestHandler):
     pass
 
@@ -56,3 +65,19 @@ class ThreadPoolBase(Basehandler):
         time.sleep(3)
         data = {"data": "睡了三秒，哈哈哈哈哈"}
         return data
+
+
+def jobs():
+    print("我在别的地方执行")
+    print("在别的地方睡好了")
+    return {"data":"RQ handler"}
+
+class RQHandler(Basehandler):
+
+    def get(self):
+        job = q.enqueue(jobs)
+        print(job.result)
+        print(job)
+        time.sleep(2)
+        print(job.result)  # => 889
+        self.write("hahah")
