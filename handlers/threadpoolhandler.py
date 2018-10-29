@@ -13,6 +13,7 @@ A = manager.dict({"dta":"我是旧数据"})
 
 
 class ThreadPoolHandler(RequestHandler):
+
     @threadpool_decoration
     def get(self):
         print("我在线程里面睡")
