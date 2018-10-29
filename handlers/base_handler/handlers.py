@@ -65,19 +65,18 @@ class ThreadPoolBase(Basehandler):
         time.sleep(3)
         data = {"data": "睡了三秒，哈哈哈哈哈"}
         return data
+a = "lalallalala"
 
-
-def jobs():
+def jobsss():
     print("我在别的地方执行")
     print("在别的地方睡好了")
-    return {"data":"RQ handler"}
+    return {"data":a}
 
 class RQHandler(Basehandler):
 
     def get(self):
-        job = q.enqueue(jobs)
-        print(job.result)
-        print(job)
-        time.sleep(2)
-        print(job.result)  # => 889
-        self.write("hahah")
+        job = q.enqueue(jobsss)
+        print("收到请求，交给工人处理")
+        while not job.result:
+            time.sleep(0.01)
+        self.write(job.result)

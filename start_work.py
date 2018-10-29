@@ -9,7 +9,7 @@ from rq import Connection
 from redis import ConnectionPool,Redis
 redis_conn = ConnectionPool(host="127.0.0.1", port=6379, db=1,)
 redis_conn = Redis(connection_pool=redis_conn)
-from handlers.base_handler.handlers import q
+from handlers.rqhandler import q
 if __name__ == "__main__":
     with Connection(redis_conn):
         Worker(q).work()

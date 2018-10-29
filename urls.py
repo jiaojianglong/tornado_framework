@@ -8,7 +8,8 @@ from handlers.indexhandler import IndexHandler
 # from handlers.base_handler.handlers import AsyncHandler
 from handlers.asynchandler import AsyncHandler
 from handlers.threadpoolhandler import ThreadPoolHandler
-from handlers.base_handler.handlers import RQHandler
+# from handlers.base_handler.handlers import RQHandler
+from handlers.rqhandler import RQHandler
 handler = [
     (r"/index", IndexHandler),
     (r"/threadpool", ThreadPoolHandler),
