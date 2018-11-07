@@ -22,3 +22,12 @@ class ThreadPoolHandler(RequestHandler):
         time.sleep(3)
         print("线程里面睡完了")
         return {"data":"thread pool sleep"}
+
+
+def haha():
+    print("我是任务")
+    return "我被做完了"
+
+handler = [
+    (r'/rqhandlers',haha,"GET")
+]
